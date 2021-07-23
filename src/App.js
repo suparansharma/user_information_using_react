@@ -1,6 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import { useEffect, useState } from 'react';
+import Friend from './components/Friend/Friend';
 
 function App() {
 
@@ -15,6 +22,10 @@ function App() {
     <div >
 
    <h1>The number of users are : {friends.length}</h1>
+   {
+     friends.map(friend => <Friend friend={friend}></Friend>)
+   }
+
     </div>
   );
 }
