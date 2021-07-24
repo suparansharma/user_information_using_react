@@ -7,24 +7,33 @@ import {
   Link
 } from "react-router-dom";
 import { useEffect, useState } from 'react';
-import Friend from './components/Friend/Friend';
+import Home from './components/Home/Home';
+import NoMatch from './components/NoMatch/NoMatch';
+import FriendDetails from './components/FriendDetails/FriendDetails';
+
 
 function App() {
 
-  const [friends,setFriends]=useState([]);
-  useEffect(() =>{
 
-    fetch('https://jsonplaceholder.typicode.com/users')
-    .then(res =>res.json())
-    .then(data=>setFriends(data))
-  },[])
   return (
     <div >
+<Router>
+  <Switch>
+    <Route path = "/home">
+    <Home></Home>
+    </Route>
+    <Route path="/friend/:friendId">
+    <FriendDetails></FriendDetails>
+    </Route>
+    <Route exact path="/">
+    <Home></Home>
+    </Route>
+    <Route path="*">
+    <NoMatch></NoMatch>
+    </Route>
+  </Switch>
+</Router>
 
-   <h1>The number of users are : {friends.length}</h1>
-   {
-     friends.map(friend => <Friend friend={friend}></Friend>)
-   }
 
     </div>
   );
